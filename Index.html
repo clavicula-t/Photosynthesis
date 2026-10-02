@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>광합성에 필요한 물질과 산물 확인하기 - 가상 실험</title>
+<style>
+:root{--blue:#1e73be;--cyan:#0ea5e9;--green:#16a34a;--lime:#65a30d;--red:#e11d48;--orange:#f59e0b;--ink:#1f2937;--muted:#64748b;--panel:#ffffff;--bg:#eef7fb;--line:#cbd5e1;}
+*{box-sizing:border-box} html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; } html,body{margin:0;min-height:100%;background:linear-gradient(#eef8fc,#f7fbfd);color:var(--ink);font-family:Pretendard,"Noto Sans KR",system-ui,sans-serif} button,input,select{font:inherit}
+.app{max-width:1280px;margin:auto;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;align-items:stretch}.title,.goal{background:#fff;border-radius:18px;padding:18px;box-shadow:0 8px 24px #0f4c8120}.title{border:2px solid #59a9e8}.title h1{margin:0;font-size:clamp(23px,3vw,34px);color:#0f4c81}.title p,.goal p{margin:8px 0 0;line-height:1.55}.goal{border:2px solid #84cc16}.goal strong{color:#3f7d14}.tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}.tab{border:2px solid var(--blue);background:#fff;color:#155a93;border-radius:14px;padding:10px 16px;font-weight:800;cursor:pointer}.tab.active{background:var(--blue);color:#fff}.screen{display:block}.screen.active{display:block}.unified-section+ .unified-section{margin-top:16px}
+.panel{background:#fff;border:2px solid #b9d9ee;border-radius:20px;padding:14px;box-shadow:0 8px 26px #0f4c8114}.build-grid{display:grid;grid-template-columns:245px minmax(420px,1fr) 280px;gap:14px;align-items:start}.palette h3,.guide h3,.sim-side h3{margin:0 0 10px;color:#0f4c81}.part{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;display:flex;align-items:center;gap:10px;border:2px solid #d9e8f4;background:#f8fcff;border-radius:14px;padding:10px;margin:9px 0;cursor:grab;touch-action:none;user-select:none}.part.done{opacity:.42;cursor:default}.icon{font-size:34px;width:44px;text-align:center}.part b{display:block}.part small{color:var(--muted)}
+.lab{position:relative;aspect-ratio:1.2/1;min-height:500px;border-radius:18px;border:2px solid #8dc5ed;overflow:hidden;background:linear-gradient(#f7fcff 0 62%,#e8eef2 62%)}.bench{position:absolute;left:0;right:0;bottom:0;height:31%;background:linear-gradient(#e7edf1,#cdd7df);border-top:4px solid #aab8c2}.jar{position:absolute;left:21%;top:19%;width:58%;height:57%;border:8px solid rgba(148,163,184,.8);border-top:12px solid #94a3b8;border-radius:34px 34px 28px 28px;background:linear-gradient(90deg,rgba(255,255,255,.55),rgba(186,230,253,.12),rgba(255,255,255,.45));box-shadow:inset 0 0 22px #93c5fd2b,0 14px 20px #33415520}.lid{position:absolute;left:18%;top:14%;width:64%;height:12%;border-radius:24px;background:linear-gradient(#cbd5e1,#94a3b8);border:3px solid #64748b}.jar-label{position:absolute;left:34%;top:68%;font-weight:900;color:#36566d;background:#ffffffbd;padding:5px 10px;border-radius:9px}.leaf-bed{position:absolute;left:29%;top:54%;width:42%;height:14%;display:flex;justify-content:center;gap:2px;align-items:center;z-index:2}.leaf{font-size:38px;filter:drop-shadow(0 3px 2px #0002)}
+.sensor{position:absolute;top:8%;width:14%;height:34%;border-radius:18px 18px 8px 8px;background:linear-gradient(#164e63,#0ea5e9 50%,#111827 51% 64%,#64748b 65%);border:3px solid #0f172a;z-index:4;display:flex;align-items:flex-start;justify-content:center;padding-top:10px;color:white;font-weight:900}.sensor.o2{left:37%}.sensor.co2{left:53%}.sensor-tip{position:absolute;bottom:-28%;left:41%;width:18%;height:32%;background:#111827;border-radius:0 0 8px 8px}.sensor.hidden,.leaf-bed.hidden,.lamp.hidden{display:none}.lamp{position:absolute;right:2%;top:15%;width:15%;height:60%;z-index:3}.lamp-head{height:18%;background:#dbeafe;border:4px solid #64748b;border-radius:8px;box-shadow:0 0 28px 8px #fde68a}.lamp-arm{height:62%;width:15%;margin:auto;background:#64748b}.lamp-base{height:10%;background:#475569;border-radius:50%}.light-rays{position:absolute;left:-55%;top:17%;width:55%;height:55%;opacity:.0;background:repeating-linear-gradient(165deg,transparent 0 12px,#fde047 13px 16px,transparent 17px 28px);transition:.3s}.lamp.on .light-rays{opacity:.72}.dropzone{position:absolute;border:3px dashed #60a5fa;background:#eff6ffcc;color:#1d4ed8;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;z-index:8;transition:.18s}.dropzone.hover{transform:scale(1.03);background:#dbeafe}.dropzone.installed{border-color:transparent;background:transparent;color:transparent;pointer-events:none}.z-leaves{left:28%;top:50%;width:44%;height:19%}.z-o2{left:36%;top:6%;width:16%;height:39%}.z-co2{left:52%;top:6%;width:16%;height:39%}.z-lamp{right:1%;top:12%;width:17%;height:64%}
+.guide .card{border-left:5px solid var(--cyan);background:#f8fcff;border-radius:12px;padding:10px 11px;margin:10px 0;line-height:1.5}.guide .card:nth-child(3){border-left-color:var(--green)}.guide .card:nth-child(4){border-left-color:var(--orange)}.status{font-weight:800;padding:10px;background:#eff6ff;border-radius:12px;margin-top:10px}.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn,.tab,.toggle{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.btn{border:0;border-radius:13px;padding:11px 15px;font-weight:900;background:var(--blue);color:white;cursor:pointer;box-shadow:0 4px 0 #0f4c81}.btn.secondary{background:#64748b;box-shadow:0 4px 0 #475569}.btn.green{background:#16a34a;box-shadow:0 4px 0 #166534}.btn.orange{background:#f59e0b;box-shadow:0 4px 0 #b45309}.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.sim-grid{display:grid;grid-template-columns:minmax(430px,.88fr) minmax(540px,1.12fr);gap:14px;align-items:start}.sim-stage{position:relative}.sim-lab{min-height:455px}.readouts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.meter{background:#071d2e;color:#b9f1ff;border-radius:14px;padding:12px;text-align:center;font-family:ui-monospace,Consolas,monospace;border:2px solid #155e75}.meter strong{display:block;font-size:25px}.meter.co2 strong{color:#fda4af}.meter.o2 strong{color:#7dd3fc}.controls{display:grid;gap:9px}.control{background:#f8fafc;border:1px solid #dbe4ec;border-radius:13px;padding:10px}.switch{display:flex;align-items:center;justify-content:space-between;gap:10px}.toggle{width:64px;height:34px;border-radius:20px;background:#94a3b8;border:0;padding:3px;cursor:pointer}.toggle span{display:block;width:28px;height:28px;border-radius:50%;background:#fff;transition:.2s}.toggle.on{background:#22c55e}.toggle.on span{transform:translateX(30px)}.timer{font-size:32px;font-weight:900;text-align:center;color:#0f4c81}.phase{font-weight:900;color:#0f4c81;text-align:center}.progress{height:12px;border-radius:8px;background:#dbeafe;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#38bdf8,#22c55e);transition:width .2s linear}.chartbox{margin-top:14px;background:#fff;border:2px solid #c6dceb;border-radius:16px;padding:10px}.charthead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.legend{display:flex;gap:14px;font-size:13px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}.dot.red{background:#e11d48}.dot.blue{background:#0ea5e9}canvas{display:block;width:100%;height:310px;touch-action:pan-y;border-radius:10px;background:#fbfdff}.explain{margin-top:10px;border-radius:14px;background:#f0fdf4;border:2px solid #86efac;padding:12px;line-height:1.55}.conclusion{margin-top:10px;border-radius:14px;background:#fff7ed;border:2px solid #fdba74;padding:12px;line-height:1.55}.locked{opacity:.5}.student-answer{width:100%;min-height:88px;margin-top:9px;padding:10px 12px;border:2px solid #cbd5e1;border-radius:10px;font:inherit;line-height:1.5;resize:vertical;background:#fff;color:#1f2937}.student-answer:disabled{background:#f8fafc;color:#94a3b8;cursor:not-allowed}.question-note{font-size:13px;color:#64748b;margin-top:6px}.hint{font-size:13px;color:var(--muted);line-height:1.45}.touchghost{position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);font-size:42px;background:#fff;border:2px solid #60a5fa;border-radius:12px;padding:6px;box-shadow:0 8px 28px #0003}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.build-grid,.sim-grid{grid-template-columns:1fr}.palette{order:1}.stage-panel{order:2}.guide{order:3}.lab{min-height:420px}.sim-lab{min-height:420px}.parts-mobile{display:grid;grid-template-columns:1fr 1fr;gap:8px}.part{margin:0}.guide-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}.guide .card{margin:0}.sim-side{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sim-side h3{grid-column:1/-1}.controls,.btnrow,.hint{grid-column:1/-1}}
+@media(max-width:620px){.app{padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}.panel{padding:9px;border-radius:15px}.tabs{position:sticky;top:0;z-index:50;background:#eef8fc;padding:6px 0}.tab{flex:1;padding:9px 7px;font-size:14px}.title,.goal{padding:12px}.title h1{font-size:22px}.parts-mobile,.guide-cards,.sim-side{grid-template-columns:1fr}.lab{min-height:350px}.stage-title{font-size:18px}.sensor{font-size:12px}.leaf{font-size:28px}.readouts{grid-template-columns:1fr}.meter strong{font-size:21px}canvas{height:255px}.btn{min-height:44px}.part{min-height:64px}.dropzone{font-size:12px}.jar-label{font-size:12px}.student-answer{min-height:110px}.toggle{min-width:64px}.controls .control{min-height:52px}}
+@media(max-height:560px) and (orientation:landscape){.hero{grid-template-columns:1fr 1fr}.lab,.sim-lab{min-height:360px}.tabs{position:static}.sim-side{grid-template-columns:1fr 1fr}.sim-side h3,.controls,.btnrow,.hint{grid-column:1/-1}canvas{height:220px}}
+
+.copyright-badge{position:fixed;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:9999;background:rgba(255,255,255,.92);border:1px solid #b9d8ee;border-radius:10px;padding:6px 10px;font-size:12px;font-weight:700;color:#35556f;box-shadow:0 3px 12px rgba(15,76,129,.12);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);white-space:nowrap;pointer-events:none}
+@media(max-width:600px){.copyright-badge{font-size:10px;padding:5px 7px;top:max(6px,env(safe-area-inset-top));right:max(7px,env(safe-area-inset-right))}}
+
+.lux-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.lux-btn{border:2px solid #1e73be;background:#fff;color:#155a93;border-radius:12px;padding:9px 14px;font-weight:900;cursor:pointer}.lux-btn.active{background:#1e73be;color:#fff}.prediction-panel{margin-top:14px;border:2px solid #a78bfa;border-radius:16px;padding:12px;background:#faf7ff}.prediction-panel.hidden{display:none}.prediction-title{font-size:18px;font-weight:900;color:#6d28d9;margin-bottom:4px}.prediction-note{font-size:13px;color:#64748b;line-height:1.5;margin-bottom:10px}.prediction-workspace{display:grid;grid-template-columns:1fr 1fr;gap:12px}.reference-chart,.prediction-drop{border-radius:14px;padding:9px;background:#fff}.reference-chart{border:2px solid #bfdbfe}.prediction-drop{border:3px dashed #a78bfa;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.prediction-drop.hover{background:#f3e8ff}.prediction-drop.filled{border-style:solid;justify-content:flex-start}.prediction-drop canvas,.reference-chart canvas{width:100%;height:220px;display:block}.prediction-options{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}.graph-option{border:2px solid #ddd6fe;border-radius:13px;background:#fff;padding:7px;cursor:grab;touch-action:none;user-select:none}.graph-option.selected{outline:3px solid #8b5cf6}.graph-option canvas{width:100%;height:120px;display:block;pointer-events:none}.graph-option b{display:block;text-align:center;font-size:12px;margin-top:3px;color:#5b21b6}.prediction-status{font-size:13px;font-weight:800;color:#6d28d9;margin-top:8px}@media(max-width:760px){.prediction-workspace,.prediction-options{grid-template-columns:1fr}}
+
+/* 실험 장치 화면 맞춤 보정 */
+.sim-grid{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:14px;width:100%}
+.sim-stage,.sim-side{min-width:0;overflow:hidden}
+.sim-stage{padding:14px}
+.sim-stage .sim-lab{width:100%;max-width:100%;min-width:0;min-height:430px;aspect-ratio:1.28/1;overflow:hidden}
+/* 왼쪽의 불필요한 빈 공간을 줄이고 장치를 전체적으로 왼쪽으로 이동 */
+.sim-lab .lid{left:11%;width:66%}
+.sim-lab .jar{left:14%;width:60%}
+.sim-lab .jar-label{left:32%}
+.sim-lab .leaf-bed{left:22%;width:45%}
+.sim-lab .sensor.o2{left:32%}
+.sim-lab .sensor.co2{left:49%}
+.sim-lab .lamp{right:2%;width:16%}
+@media(max-width:1100px){
+ .sim-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+ .sim-stage .sim-lab{min-height:400px}
+ .sim-lab .leaf{font-size:34px}
+}
+@media(max-width:980px){
+ .sim-grid{grid-template-columns:1fr}
+ .sim-stage,.sim-side{overflow:visible}
+ .sim-stage .sim-lab{max-width:760px;margin:0 auto;min-height:410px}
+}
+@media(max-width:620px){
+ .sim-stage .sim-lab{min-height:340px;aspect-ratio:1.18/1}
+ .sim-lab .lid{left:9%;width:68%}
+ .sim-lab .jar{left:12%;width:62%}
+ .sim-lab .sensor.o2{left:30%}
+ .sim-lab .sensor.co2{left:48%}
+ .sim-lab .leaf-bed{left:19%;width:48%}
+ .sim-lab .lamp{right:1%;width:17%}
+}
+
+
+.chartbox{position:relative}
+.gas-question{display:none;margin:10px 0 6px;font-weight:900;font-size:16px;color:#17324a}
+.gas-question.show{display:block}
+.graph-drop{display:none;position:absolute;z-index:8;width:84px;height:54px;border:2px solid #355f32;background:#fff;align-items:center;justify-content:center;font-size:25px;font-weight:800;border-radius:2px;cursor:pointer}
+.graph-drop.show{display:flex}
+.graph-drop.one{left:12%;top:31%}
+.graph-drop.two{left:28%;top:43%}
+.graph-drop.filled{font-size:14px;line-height:1.2;text-align:center;padding:4px}
+.gas-bank-inline{display:none;justify-content:center;gap:38px;flex-wrap:wrap;margin:14px 0 4px}
+.gas-bank-inline.show{display:flex}
+.gas-chip-inline{border:2px dashed #222;background:#fff;padding:9px 17px;font-size:19px;cursor:grab;user-select:none;touch-action:none}
+.gas-chip-inline.selected{outline:3px solid #7cc5ec}
+.drag-note{display:none;text-align:center;font-size:12px;color:#64748b;margin:5px 0 0}.drag-note.show{display:block}
+@media(max-width:650px){.graph-drop{width:68px;height:46px;font-size:21px}.graph-drop.one{left:11%;top:31%}.graph-drop.two{left:29%;top:43%}.gas-chip-inline{font-size:16px}}
+
+
+.predict7000{display:none;margin-top:12px;padding:14px;border:1px solid #b8d7e8;border-radius:14px;background:#fbfdff}
+.predict7000.show{display:block}
+.predict7000 h3{margin:0 0 12px;font-size:15px;line-height:1.55;color:#17324a}
+.choice-groups{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 12px}
+.choice-group{display:flex;gap:0;border:2px solid #365b32;background:#fff}
+.circle-choice{width:86px;height:56px;border:0;background:#fff;font-size:28px;cursor:pointer}
+.circle-choice+ .circle-choice{border-left:1px solid #8fa38b}
+.circle-choice.selected{background:#eaf7df;font-weight:900;box-shadow:inset 0 0 0 3px #69a24e}
+.predict-chart-wrap{position:relative}
+.predict-chart-wrap canvas{width:100%;height:310px;display:block}
+.predict-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin-bottom:6px}
+.predict-legend .line{display:inline-block;width:24px;border-top:3px solid;vertical-align:middle;margin-right:5px}
+.predict-legend .solid-red{border-color:#e51f46}.predict-legend .solid-blue{border-color:#139fdf}
+.predict-legend .dash{border-top-style:dashed}
+.predict-note{font-size:12px;color:#64748b;margin-top:5px}
+@media(max-width:650px){.circle-choice{width:68px;height:50px;font-size:24px}.predict-chart-wrap canvas{height:270px}}
+
+
+#predictArea,#predictionArea,#predictPanel,#predictionPanel,.predict-area,.prediction-area,.prediction-panel,.drag-options,.prediction-options{display:none!important}
+</style>
+
+<style>
+.sim-side{display:block}.sim-side>.control,.sim-side>.controls,.sim-side>.btnrow,.sim-side>.hint,.sim-side>.readouts,.sim-side>.chartbox,.sim-side>.prediction-panel{width:100%}
+.sim-side .readouts{margin-top:16px}.sim-side .chartbox{margin-top:10px}.sim-side canvas#chart{height:300px}
+@media(max-width:980px){.sim-grid{grid-template-columns:1fr}.sim-side{display:block}.sim-stage{max-width:760px;width:100%;margin:0 auto}.sim-side canvas#chart{height:300px}}
+@media(max-width:620px){.sim-side .readouts{grid-template-columns:1fr 1fr}.sim-side canvas#chart{height:250px}}
+
+/* 실험 장치 화면 맞춤 보정 */
+.sim-grid{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:14px;width:100%}
+.sim-stage,.sim-side{min-width:0;overflow:hidden}
+.sim-stage{padding:14px}
+.sim-stage .sim-lab{width:100%;max-width:100%;min-width:0;min-height:430px;aspect-ratio:1.28/1;overflow:hidden}
+/* 왼쪽의 불필요한 빈 공간을 줄이고 장치를 전체적으로 왼쪽으로 이동 */
+.sim-lab .lid{left:11%;width:66%}
+.sim-lab .jar{left:14%;width:60%}
+.sim-lab .jar-label{left:32%}
+.sim-lab .leaf-bed{left:22%;width:45%}
+.sim-lab .sensor.o2{left:32%}
+.sim-lab .sensor.co2{left:49%}
+.sim-lab .lamp{right:2%;width:16%}
+@media(max-width:1100px){
+ .sim-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+ .sim-stage .sim-lab{min-height:400px}
+ .sim-lab .leaf{font-size:34px}
+}
+@media(max-width:980px){
+ .sim-grid{grid-template-columns:1fr}
+ .sim-stage,.sim-side{overflow:visible}
+ .sim-stage .sim-lab{max-width:760px;margin:0 auto;min-height:410px}
+}
+@media(max-width:620px){
+ .sim-stage .sim-lab{min-height:340px;aspect-ratio:1.18/1}
+ .sim-lab .lid{left:9%;width:68%}
+ .sim-lab .jar{left:12%;width:62%}
+ .sim-lab .sensor.o2{left:30%}
+ .sim-lab .sensor.co2{left:48%}
+ .sim-lab .leaf-bed{left:19%;width:48%}
+ .sim-lab .lamp{right:1%;width:17%}
+}
+
+</style>
+</head>
+<body>
+<div class="copyright-badge" aria-label="copyright">Copywriter JaeG. Y &amp; AI</div>
+<div class="app">
+  <div class="hero">
+    <section class="title"><h1>🌿 광합성에 필요한 물질과 산물 확인하기</h1><p>투명 밀폐 용기 속 시금치 잎에 빛을 비추고, 산소·이산화 탄소 농도 변화를 센서로 측정하는 가상 탐구 실험입니다.</p></section>
+    <section class="goal"><strong>탐구 목표</strong><p>측정 결과를 통해 광합성에 필요한 물질과 광합성 결과 생성되는 물질을 추론합니다.</p></section>
+  </div>
+
+
+  <section id="build" class="screen active unified-section">
+    <div class="build-grid">
+      <aside class="panel palette">
+        <h3>준비물 설치</h3>
+        <div class="parts-mobile">
+          <div class="part" data-part="leaves"><div class="icon">🌿</div><div><b>시금치 잎 4~5장</b><small>겹치지 않게 펴서 넣기</small></div></div>
+          <div class="part" data-part="o2"><div class="icon">🔵</div><div><b>산소 센서</b><small>O₂ 농도 측정</small></div></div>
+          <div class="part" data-part="co2"><div class="icon">🔴</div><div><b>이산화 탄소 센서</b><small>CO₂ 농도 측정</small></div></div>
+          <div class="part" data-part="lamp"><div class="icon">💡</div><div><b>LED 전등</b><small>빛 공급</small></div></div>
+        </div>
+        <p class="hint">PC에서는 끌어다 놓기, 스마트기기에서는 항목을 누른 뒤 설치 위치를 눌러도 됩니다.</p>
+        <div class="btnrow"><button id="buildReset" class="btn secondary">↺ 장치 구성 리셋</button></div>
+      </aside>
+
+      <main class="panel stage-panel">
+        <h3 class="stage-title">그림과 같은 위치에 실험 장치를 설치하세요.</h3>
+        <div class="lab" id="buildLab">
+          <div class="bench"></div><div class="lid"></div><div class="jar"></div><div class="jar-label">투명 밀폐 용기</div>
+          <div class="leaf-bed hidden" id="leavesView"><span class="leaf">🍃</span><span class="leaf">🍃</span><span class="leaf">🍃</span><span class="leaf">🍃</span><span class="leaf">🍃</span></div>
+          <div class="sensor o2 hidden" id="o2View">O₂<div class="sensor-tip"></div></div>
+          <div class="sensor co2 hidden" id="co2View">CO₂<div class="sensor-tip"></div></div>
+          <div class="lamp hidden" id="lampView"><div class="lamp-head"></div><div class="lamp-arm"></div><div class="lamp-base"></div><div class="light-rays"></div></div>
+          <div class="dropzone z-leaves" data-zone="leaves">시금치 잎</div>
+          <div class="dropzone z-o2" data-zone="o2">산소 센서</div>
+          <div class="dropzone z-co2" data-zone="co2">CO₂ 센서</div>
+          <div class="dropzone z-lamp" data-zone="lamp">LED 전등</div>
+        </div>
+        <div id="buildStatus" class="status">장치를 4개 모두 설치하세요. (0/4)</div>
+      </main>
+
+      <aside class="panel guide">
+        <h3>탐구 과정</h3><div class="guide-cards">
+          <div class="card"><b>① 시금치 넣기</b><br>투명 밀폐 용기 안에 시금치 잎 4~5장을 최대한 겹치지 않게 펴서 넣습니다.</div>
+          <div class="card"><b>② 센서 설치</b><br>산소 센서와 이산화 탄소 센서를 밀폐 용기에 설치합니다.</div>
+          <div class="card"><b>③ 측정 설정</b><br>7분 동안 두 기체의 농도 변화를 측정합니다.</div>
+          <div class="card"><b>④ 빛 비추기</b><br>측정 시작 버튼을 누르면 센서와 LED 전등이 자동으로 켜지고 농도 변화가 그래프로 나타납니다.</div>
+        </div>
+        <div class="btnrow"><button id="goMeasure" class="btn green" disabled>측정 영역으로 이동 ↓</button></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="measure" class="screen active unified-section">
+    <div class="sim-grid">
+      <main class="panel sim-stage">
+        <h3 class="stage-title">LED 빛을 비추면서 O₂와 CO₂ 농도 변화를 측정해 보세요.</h3>
+        <div class="lab sim-lab">
+          <div class="bench"></div><div class="lid"></div><div class="jar"></div><div class="jar-label">밀폐 상태</div>
+          <div class="leaf-bed"><span class="leaf">🍃</span><span class="leaf">🍃</span><span class="leaf">🍃</span><span class="leaf">🍃</span><span class="leaf">🍃</span></div>
+          <div class="sensor o2">O₂<div class="sensor-tip"></div></div><div class="sensor co2">CO₂<div class="sensor-tip"></div></div>
+          <div class="lamp" id="simLamp"><div class="lamp-head"></div><div class="lamp-arm"></div><div class="lamp-base"></div><div class="light-rays"></div></div>
+        </div>
+
+      </main>
+
+      <aside class="panel sim-side">
+        <h3>측정 제어</h3><div class="control"><b>조도 선택</b><div class="hint">5000 lx의 결과를 기준으로 7000 lx에서의 변화를 예상해 보세요.</div><div class="lux-selector"><button class="lux-btn active" id="lux5000">5000 lx</button><button class="lux-btn" id="lux7000">7000 lx</button></div></div>
+        <div class="controls">
+          <div class="control"><div class="phase" id="phase">실험 준비</div><div class="timer" id="timer">00:00</div><div class="progress"><div class="bar" id="bar"></div></div></div>
+        </div>
+        <div class="btnrow"><button id="startBtn" class="btn green">▶ 측정 시작</button><button id="resetBtn" class="btn secondary">↺ 측정 리셋</button></div>
+        <p class="hint">실제 7분 측정을 수업용 가상 실험에서는 약 15초로 압축해 재생합니다. 그래프의 시간축은 실제 측정 시간(0~7분)을 나타냅니다.</p>
+        <div class="readouts">
+          <div class="meter co2">이산화 탄소 농도<strong id="co2Value">628 ppm</strong></div>
+          <div class="meter o2">산소 농도<strong id="o2Value">202300 ppm</strong></div>
+        </div>
+        <div class="chartbox">
+          <div class="charthead"><b>기체 농도 변화</b><div class="legend"><span><i class="dot red"></i>CO₂</span><span><i class="dot blue"></i>O₂</span></div></div>
+          <div class="gas-question" id="gasQuestion">그래프의 ①과 ②에 해당하는 기체의 이름을 끌어 놓으시오.</div>
+          <canvas id="chart" width="900" height="380"></canvas>
+          <div class="graph-drop one" id="graphDropOne" data-slot="one">①</div>
+          <div class="graph-drop two" id="graphDropTwo" data-slot="two">②</div>
+          <div class="gas-bank-inline" id="gasBankInline">
+            <button type="button" class="gas-chip-inline" draggable="true" data-gas="산소">산소</button>
+            <button type="button" class="gas-chip-inline" draggable="true" data-gas="이산화 탄소">이산화 탄소</button>
+          </div>
+          <div class="drag-note" id="dragNote">기체 이름을 ① 또는 ②에 끌어 놓으세요. 터치 기기에서는 기체 이름을 누른 뒤 ① 또는 ②를 누르면 됩니다.</div>
+<div class="predict7000" id="predict7000">
+  <h3>빛의 세기를 약한 빛(5000 lx)에서 강한 빛(7000 lx)로 바꿔 측정했을 때 그래프의 모양이 어떻게 나타날지를 ①과 ② 중 1개, ③과 ④ 중 1개를 선택하시오.</h3>
+  <div class="choice-groups">
+    <div class="choice-group" aria-label="이산화 탄소 변화 선택">
+      <button type="button" class="circle-choice" data-choice="1">①</button>
+      <button type="button" class="circle-choice" data-choice="2">②</button>
+    </div>
+    <div class="choice-group" aria-label="산소 변화 선택">
+      <button type="button" class="circle-choice" data-choice="3">③</button>
+      <button type="button" class="circle-choice" data-choice="4">④</button>
+    </div>
+  </div>
+  <div class="predict-legend">
+    <span><i class="line solid-red"></i>5000 lx CO₂</span>
+    <span><i class="line solid-blue"></i>5000 lx O₂</span>
+    <span>점선 = 선택한 7000 lx 예상 그래프</span>
+  </div>
+  <div class="predict-chart-wrap"><canvas id="predict7000Chart"></canvas></div>
+  <div class="predict-note">①·② 중 하나와 ③·④ 중 하나를 선택하면 해당 점선 그래프만 나타납니다. 선택을 바꾸면 이전 점선은 사라지고 새 선택만 표시됩니다.</div>
+</div><div class="prediction-legend" id="predictionLegend"><span>┄┄ 7000 lx 예상 O₂</span><span>┄┄ 7000 lx 예상 CO₂</span></div>
+        </div>
+        <section id="predictionPanel" class="prediction-panel hidden">
+          <div class="prediction-title">그래프 모양이 어떻게 바뀔까요?</div>
+          <div class="prediction-note"><b>위의 5000 lx 실선 그래프는 그대로 유지</b>됩니다. 7000 lx에서 예상되는 <b>산소와 이산화 탄소 그래프를 각각</b> 선택하여 위의 기존 그래프 위에 드래그 앤 드롭하세요. 추가한 7000 lx 그래프는 <b>점선</b>으로 표시됩니다.</div>
+          <div class="drop-hint" id="predictionDrop">↑ 선택한 그래프를 위의 기존 5000 lx 그래프 영역에 놓으세요.</div>
+
+          <div class="choice-group">
+            <h4 style="color:#0284c7">🔵 산소 농도 변화 선택지</h4>
+            <div class="choice-grid">
+              <div class="graph-option" draggable="true" data-gas="o2" data-speed="fast"><canvas></canvas><b>출발점은 5000 lx와 같으나<br>5000 lx보다 빠르게 증가</b></div>
+              <div class="graph-option" draggable="true" data-gas="o2" data-speed="slow"><canvas></canvas><b>출발점은 5000 lx와 같으나<br>5000 lx보다 느리게 증가</b></div>
+            </div>
+          </div>
+
+          <div class="choice-group">
+            <h4 style="color:#e11d48">🔴 이산화 탄소 농도 변화 선택지</h4>
+            <div class="choice-grid">
+              <div class="graph-option" draggable="true" data-gas="co2" data-speed="fast"><canvas></canvas><b>출발점은 5000 lx와 같으나<br>5000 lx보다 빠르게 감소</b></div>
+              <div class="graph-option" draggable="true" data-gas="co2" data-speed="slow"><canvas></canvas><b>출발점은 5000 lx와 같으나<br>5000 lx보다 느리게 감소</b></div>
+            </div>
+          </div>
+
+          <div class="btnrow"><button class="btn secondary" id="predictionReset">↺ 예측 다시 하기</button></div>
+          <div class="prediction-status" id="predictionStatus">산소와 이산화 탄소 그래프를 각각 선택해 보세요.</div>
+        </section>
+        </div>
+      </aside>
+    </div>
+  </section>
+</div>
+<script>
+(() => {
+const tabs=[...document.querySelectorAll('.tab')], screens=[...document.querySelectorAll('.screen')];
+function showTab(id){tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id)); screens.forEach(s=>s.classList.toggle('active',s.id===id)); if(id==='measure') setTimeout(drawChart,50)}
+tabs.forEach(t=>t.addEventListener('click',()=>showTab(t.dataset.tab)));
+
+const installed=new Set(); let selectedPart=null, ghost=null;
+const parts=[...document.querySelectorAll('.part')], zones=[...document.querySelectorAll('.dropzone')];
+function install(name){ if(installed.has(name)) return; installed.add(name); document.querySelector(`.part[data-part="${name}"]`).classList.add('done'); document.querySelector(`[data-zone="${name}"]`).classList.add('installed'); document.getElementById(name+'View').classList.remove('hidden'); updateBuild(); }
+function updateBuild(){document.getElementById('buildStatus').textContent=installed.size===4?'설치 완료! 밀폐 용기와 센서, LED 전등이 준비되었습니다.':`장치를 4개 모두 설치하세요. (${installed.size}/4)`; document.getElementById('goMeasure').disabled=installed.size!==4;}
+function clearSelection(){parts.forEach(x=>x.style.outline='');selectedPart=null}
+function selectPart(p){if(installed.has(p.dataset.part))return;selectedPart=p.dataset.part;parts.forEach(x=>x.style.outline='');p.style.outline='3px solid #60a5fa'}
+function makeGhost(p,x,y){if(ghost)ghost.remove();ghost=document.createElement('div');ghost.className='touchghost';ghost.textContent=p.querySelector('.icon').textContent;document.body.appendChild(ghost);moveGhostXY(x,y)}
+function moveGhostXY(x,y){if(!ghost)return;ghost.style.left=x+'px';ghost.style.top=y+'px'}
+function finishTouch(x,y){if(!ghost)return;const el=document.elementFromPoint(x,y);const z=el&&el.closest?el.closest('.dropzone'):null;if(z&&z.dataset.zone===selectedPart)install(selectedPart);ghost.remove();ghost=null;zones.forEach(q=>q.classList.remove('hover'));clearSelection()}
+parts.forEach(p=>{
+ p.draggable=true;
+ p.addEventListener('contextmenu',e=>e.preventDefault());
+ p.addEventListener('dragstart',e=>{if(installed.has(p.dataset.part)){e.preventDefault();return;}selectedPart=p.dataset.part;if(e.dataTransfer){e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',selectedPart)}});
+ p.addEventListener('dragend',()=>{zones.forEach(z=>z.classList.remove('hover'));clearSelection()});
+ p.addEventListener('click',()=>selectPart(p));
+ if(window.PointerEvent){
+   p.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'||installed.has(p.dataset.part))return;selectPart(p);makeGhost(p,e.clientX,e.clientY);try{p.setPointerCapture(e.pointerId)}catch(_){}});
+   p.addEventListener('pointermove',e=>{if(!ghost)return;e.preventDefault();moveGhostXY(e.clientX,e.clientY);const el=document.elementFromPoint(e.clientX,e.clientY);zones.forEach(z=>z.classList.toggle('hover',!!el&&(el===z||z.contains(el))))});
+   p.addEventListener('pointerup',e=>finishTouch(e.clientX,e.clientY));
+   p.addEventListener('pointercancel',()=>{if(ghost){ghost.remove();ghost=null}zones.forEach(z=>z.classList.remove('hover'));clearSelection()});
+ }else{
+   p.addEventListener('touchstart',e=>{if(installed.has(p.dataset.part))return;const t=e.touches[0];selectPart(p);makeGhost(p,t.clientX,t.clientY)},{passive:true});
+   p.addEventListener('touchmove',e=>{if(!ghost)return;e.preventDefault();const t=e.touches[0];moveGhostXY(t.clientX,t.clientY)},{passive:false});
+   p.addEventListener('touchend',e=>{if(!ghost)return;const t=e.changedTouches[0];finishTouch(t.clientX,t.clientY)});
+   p.addEventListener('touchcancel',()=>{if(ghost){ghost.remove();ghost=null}clearSelection()});
+ }
+});
+zones.forEach(z=>{z.addEventListener('dragover',e=>{e.preventDefault();if(e.dataTransfer)e.dataTransfer.dropEffect='move';z.classList.add('hover')});z.addEventListener('dragleave',()=>z.classList.remove('hover'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('hover');const n=e.dataTransfer?e.dataTransfer.getData('text/plain'):selectedPart;if(n===z.dataset.zone)install(n);clearSelection()});z.addEventListener('click',()=>{if(selectedPart===z.dataset.zone){install(selectedPart);clearSelection()}})});
+document.getElementById('buildReset').onclick=()=>{installed.clear(); selectedPart=null; parts.forEach(p=>{p.classList.remove('done');p.style.outline=''}); zones.forEach(z=>z.classList.remove('installed','hover')); ['leaves','o2','co2','lamp'].forEach(n=>document.getElementById(n+'View').classList.add('hidden')); updateBuild();};
+document.getElementById('goMeasure').onclick=()=>{document.getElementById('measure').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(drawChart,350)};
+
+let selectedLux=5000, selectedPrediction={o2:null,co2:null}, selectedChoice=null, predictionGhost=null;
+const lux5000=document.getElementById('lux5000'),lux7000=document.getElementById('lux7000');
+const predictionPanel=document.getElementById('predictionPanel'),predictionDrop=document.getElementById('predictionDrop');
+const predictionStatus=document.getElementById('predictionStatus'),predictionLegend=document.getElementById('predictionLegend');
+const graphOptions=[...document.querySelectorAll('.graph-option')];
+const chartBox=document.querySelector('.chartbox');
+const predictionChartCanvas=document.getElementById('chart');
+
+function setLux(v){
+  selectedLux=v;
+  lux5000.classList.toggle('active',v===5000);
+  lux7000.classList.toggle('active',v===7000);
+  predictionPanel.classList.toggle('hidden',v!==7000);
+  chartBox.classList.toggle('prediction-target',v===7000);
+  predictionLegend.style.display=v===7000?'flex':'none';
+  if(v===7000)setTimeout(()=>{drawChoiceGraphs();drawChart()},30);
+  else drawChart();
+
+ set7000PredictionVisible(selectedLux===7000);
+}
+lux5000.onclick=()=>setLux(5000);
+lux7000.onclick=()=>setLux(7000);
+
+// 5000 lx와 동일한 출발점에서 변화 속도만 다르게 구성
+function predictedValue(gas,speed,sec){
+  const t=sec/420;
+  const factor=speed==='fast'?1.38:0.62;
+  // 변화 속도 차이가 초반부터 명확히 보이되 7분 동안 부드럽게 이어지는 수업용 예측 곡선
+  const e=Math.min(1, t*factor);
+  const ease=e*e*(3-2*e);
+  if(gas==='o2') return 202300 + 564*ease;
+  return 628 - 43*ease;
+}
+
+function drawChoiceGraph(canvas,gas,speed){
+  const d=Math.max(1,window.devicePixelRatio||1),w=canvas.clientWidth||92,h=canvas.clientHeight||64;
+  canvas.width=Math.round(w*d);canvas.height=Math.round(h*d);
+  const c=canvas.getContext('2d');c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);
+  const L=5,R=5,T=5,B=5,pw=w-L-R,ph=h-T-B;
+  c.strokeStyle='#e2e8f0';c.lineWidth=1;c.strokeRect(L,T,pw,ph);
+  const X=s=>L+pw*s/420;
+  const Y=gas==='o2'
+    ? v=>T+ph*(1-(v-202250)/(202900-202250))
+    : v=>T+ph*(1-(v-580)/(635-580));
+  c.strokeStyle=gas==='o2'?'#0ea5e9':'#e11d48';c.lineWidth=2.5;c.setLineDash([6,4]);c.beginPath();
+  for(let s=0;s<=420;s+=15){const x=X(s),y=Y(predictedValue(gas,speed,s));s?c.lineTo(x,y):c.moveTo(x,y)}
+  c.stroke();c.setLineDash([]);
+}
+function drawChoiceGraphs(){graphOptions.forEach(o=>drawChoiceGraph(o.querySelector('canvas'),o.dataset.gas,o.dataset.speed))}
+
+function updatePredictionStatus(){
+  const o=selectedPrediction.o2, c=selectedPrediction.co2;
+  if(o&&c) predictionStatus.textContent='산소와 이산화 탄소의 7000 lx 예상 그래프를 모두 겹쳐 놓았습니다.';
+  else if(o) predictionStatus.textContent='산소 예상 그래프를 놓았습니다. 이제 이산화 탄소 그래프도 선택해 보세요.';
+  else if(c) predictionStatus.textContent='이산화 탄소 예상 그래프를 놓았습니다. 이제 산소 그래프도 선택해 보세요.';
+  else predictionStatus.textContent='산소와 이산화 탄소 그래프를 각각 선택해 보세요.';
+}
+function placePrediction(choice){
+  if(!choice)return;
+  selectedPrediction[choice.gas]=choice.speed;
+  graphOptions.filter(o=>o.dataset.gas===choice.gas).forEach(o=>o.classList.toggle('selected',o.dataset.speed===choice.speed));
+  updatePredictionStatus();drawChart();
+}
+function resetPrediction(){
+  selectedPrediction={o2:null,co2:null};selectedChoice=null;
+  graphOptions.forEach(o=>o.classList.remove('selected'));updatePredictionStatus();drawChart();
+}
+document.getElementById('predictionReset').onclick=resetPrediction;
+
+function chartContains(x,y){const r=predictionChartCanvas.getBoundingClientRect();return x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom}
+
+graphOptions.forEach(o=>{
+  o.addEventListener('dragstart',e=>{
+    const payload={gas:o.dataset.gas,speed:o.dataset.speed};
+    selectedChoice=payload;
+    e.dataTransfer.effectAllowed='copy';
+    e.dataTransfer.setData('text/plain',JSON.stringify(payload));
+  });
+  o.addEventListener('click',()=>{
+    graphOptions.filter(q=>q.dataset.gas===o.dataset.gas).forEach(q=>q.classList.remove('selected'));
+    o.classList.add('selected');selectedChoice={gas:o.dataset.gas,speed:o.dataset.speed};
+    predictionStatus.textContent=`${o.dataset.gas==='o2'?'산소':'이산화 탄소'} 선택지를 골랐습니다. 위의 기존 그래프를 누르면 겹쳐집니다.`;
+  });
+  if(window.PointerEvent){
+    o.addEventListener('pointerdown',e=>{
+      if(e.pointerType==='mouse')return;
+      selectedChoice={gas:o.dataset.gas,speed:o.dataset.speed};
+      predictionGhost=document.createElement('div');predictionGhost.className='prediction-ghost';
+      const c=document.createElement('canvas');predictionGhost.appendChild(c);document.body.appendChild(predictionGhost);
+      drawChoiceGraph(c,o.dataset.gas,o.dataset.speed);
+      predictionGhost.style.left=e.clientX+'px';predictionGhost.style.top=e.clientY+'px';
+      try{o.setPointerCapture(e.pointerId)}catch(_){}
+    });
+    o.addEventListener('pointermove',e=>{
+      if(!predictionGhost)return;e.preventDefault();
+      predictionGhost.style.left=e.clientX+'px';predictionGhost.style.top=e.clientY+'px';
+      chartBox.classList.toggle('hover',chartContains(e.clientX,e.clientY));
+    });
+    o.addEventListener('pointerup',e=>{
+      if(!predictionGhost)return;
+      if(chartContains(e.clientX,e.clientY))placePrediction(selectedChoice);
+      predictionGhost.remove();predictionGhost=null;chartBox.classList.remove('hover');
+    });
+  }
+});
+
+predictionChartCanvas.addEventListener('dragover',e=>{if(selectedLux!==7000)return;e.preventDefault();chartBox.classList.add('hover')});
+predictionChartCanvas.addEventListener('dragleave',()=>chartBox.classList.remove('hover'));
+predictionChartCanvas.addEventListener('drop',e=>{
+  if(selectedLux!==7000)return;e.preventDefault();chartBox.classList.remove('hover');
+  try{placePrediction(JSON.parse(e.dataTransfer.getData('text/plain')))}catch(_){if(selectedChoice)placePrediction(selectedChoice)}
+});
+predictionChartCanvas.addEventListener('click',()=>{if(selectedLux===7000&&selectedChoice)placePrediction(selectedChoice)});
+let sensors=false, light=false, running=false, elapsed=0, raf=null, startStamp=0; const durationMs=15000; const maxSec=420;
+const startBtn=document.getElementById('startBtn'),simLamp=document.getElementById('simLamp');
+const co2El=document.getElementById('co2Value'),o2El=document.getElementById('o2Value'),timerEl=document.getElementById('timer'),bar=document.getElementById('bar'),phase=document.getElementById('phase');
+let data=[];
+function updateReady(){startBtn.disabled=running; phase.textContent=running?'광합성 진행 중':'실험 준비';}
+function valuesAt(sec){
+ const t=Math.max(0,Math.min(1,sec/maxSec));
+ const ease=t*t*(3-2*t);
+ const co2=628-(34*ease)+Math.sin(sec/47)*0.35;
+ const o2=202300+(430*ease)+Math.sin(sec/53)*3;
+ return {co2,o2};
+}
+
+let selectedGasName=null, gasActivityVisible=false;
+let predCO2=null, predO2=null;
+const predict7000=document.getElementById('predict7000');
+const predict7000Canvas=document.getElementById('predict7000Chart');
+
+const gasQuestion=document.getElementById('gasQuestion');
+const gasBankInline=document.getElementById('gasBankInline');
+const dragNote=document.getElementById('dragNote');
+const graphDrops=[document.getElementById('graphDropOne'),document.getElementById('graphDropTwo')];
+
+function showGasActivity(){
+  gasActivityVisible=true;
+  if(selectedLux!==7000){
+    gasQuestion.classList.add('show'); gasBankInline.classList.add('show'); dragNote.classList.add('show');
+    graphDrops.forEach(d=>d.classList.add('show'));
+  }
+  drawChart();
+}
+function hideGasActivity(){
+  gasActivityVisible=false; selectedGasName=null;
+  gasQuestion.classList.remove('show'); gasBankInline.classList.remove('show'); dragNote.classList.remove('show');
+  graphDrops.forEach(d=>{d.classList.remove('show','filled');d.textContent=d.dataset.slot==='one'?'①':'②';delete d.dataset.answer;});
+  document.querySelectorAll('.gas-chip-inline').forEach(c=>c.classList.remove('selected'));
+}
+function placeGasName(drop,gas){
+  if(!drop||!gas)return;
+  drop.textContent=gas; drop.dataset.answer=gas; drop.classList.add('filled');
+  selectedGasName=null;
+  document.querySelectorAll('.gas-chip-inline').forEach(c=>c.classList.remove('selected'));
+}
+document.querySelectorAll('.gas-chip-inline').forEach(chip=>{
+  chip.addEventListener('dragstart',e=>{e.dataTransfer.effectAllowed='copy';e.dataTransfer.setData('text/plain',chip.dataset.gas);});
+  chip.addEventListener('click',()=>{selectedGasName=chip.dataset.gas;document.querySelectorAll('.gas-chip-inline').forEach(c=>c.classList.toggle('selected',c===chip));});
+});
+graphDrops.forEach(drop=>{
+  drop.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='copy';});
+  drop.addEventListener('drop',e=>{e.preventDefault();placeGasName(drop,e.dataTransfer.getData('text/plain'));});
+  drop.addEventListener('click',()=>{if(selectedGasName)placeGasName(drop,selectedGasName);});
+});
+
+
+function set7000PredictionVisible(on){
+  if(!predict7000)return;
+  predict7000.classList.toggle('show',on);
+  // 7000 lx 선택 시 5000 lx의 기체이름 드래그 활동(노란색 표시 부분)은 감춤
+  if(on){
+    gasQuestion.classList.remove('show');gasBankInline.classList.remove('show');dragNote.classList.remove('show');
+    graphDrops.forEach(d=>d.classList.remove('show'));
+    drawPredict7000();
+  }else if(gasActivityVisible){
+    gasQuestion.classList.add('show');gasBankInline.classList.add('show');dragNote.classList.add('show');
+    graphDrops.forEach(d=>d.classList.add('show'));
+  }
+}
+function drawPredict7000(){
+ if(!predict7000Canvas)return;
+ const d=Math.max(1,devicePixelRatio||1),w=predict7000Canvas.clientWidth||620,h=predict7000Canvas.clientHeight||310;
+ predict7000Canvas.width=w*d;predict7000Canvas.height=h*d;
+ const c=predict7000Canvas.getContext('2d');c.setTransform(d,0,0,d,0,0);
+ const L=48,R=58,T=18,B=35,pw=w-L-R,ph=h-T-B;
+ c.clearRect(0,0,w,h);c.strokeStyle='#d4e0e8';c.lineWidth=1;c.font='10px sans-serif';c.fillStyle='#667b89';
+ c.textAlign='center';
+ for(let i=0;i<=7;i++){let xx=L+pw*i/7;c.beginPath();c.moveTo(xx,T);c.lineTo(xx,T+ph);c.stroke();c.fillText(i,xx,h-12)}
+ for(let j=0;j<=5;j++){let yy=T+ph*j/5;c.beginPath();c.moveTo(L,yy);c.lineTo(L+pw,yy);c.stroke()}
+ const X=m=>L+pw*m/7, Yc=v=>T+ph*(630-v)/45, Yo=v=>T+ph*(202850-v)/600;
+ c.textAlign='left';c.fillStyle='#e51f46';c.font='bold 10px sans-serif';c.fillText('630',4,T+4);c.fillText('585',4,T+ph);
+ c.textAlign='right';c.fillStyle='#139fdf';c.fillText('202850',w-3,T+4);c.fillText('202250',w-3,T+ph);
+ c.textAlign='center';c.fillStyle='#607482';c.fillText('시간(분)',L+pw/2,h-2);
+
+ // 5000 lx 기준 실선
+ c.setLineDash([]);c.lineWidth=2.4;c.strokeStyle='#e51f46';c.beginPath();
+ for(let s=0;s<=420;s+=5){let m=s/60,v=valuesAt(s).co2;s===0?c.moveTo(X(m),Yc(v)):c.lineTo(X(m),Yc(v))}c.stroke();
+ c.strokeStyle='#139fdf';c.beginPath();
+ for(let s=0;s<=420;s+=5){let m=s/60,v=valuesAt(s).o2;s===0?c.moveTo(X(m),Yo(v)):c.lineTo(X(m),Yo(v))}c.stroke();
+
+ // ①/②: CO2 예상. ① = 더 완만한 감소, ② = 더 빠른 감소
+ if(predCO2){
+   c.setLineDash([7,5]);c.lineWidth=2;c.strokeStyle='#ff4967';c.beginPath();
+   for(let s=0;s<=420;s+=5){
+     let t=s/420,e=t*t*(3-2*t),v=628-(predCO2===1?24:42)*e;
+     s===0?c.moveTo(X(s/60),Yc(v)):c.lineTo(X(s/60),Yc(v));
+   }c.stroke();
+ }
+ // ③/④: O2 예상. ③ = 더 빠른 증가, ④ = 더 완만한 증가
+ if(predO2){
+   c.setLineDash([7,5]);c.lineWidth=2;c.strokeStyle='#2d9fff';c.beginPath();
+   for(let s=0;s<=420;s+=5){
+     let t=s/420,e=t*t*(3-2*t),v=202300+(predO2===3?550:300)*e;
+     s===0?c.moveTo(X(s/60),Yo(v)):c.lineTo(X(s/60),Yo(v));
+   }c.stroke();
+ }
+ c.setLineDash([]);
+}
+document.querySelectorAll('.circle-choice').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+   const n=+btn.dataset.choice;
+   if(n<=2){
+     predCO2=n;
+     document.querySelectorAll('.circle-choice[data-choice="1"],.circle-choice[data-choice="2"]').forEach(b=>b.classList.toggle('selected',+b.dataset.choice===n));
+   }else{
+     predO2=n;
+     document.querySelectorAll('.circle-choice[data-choice="3"],.circle-choice[data-choice="4"]').forEach(b=>b.classList.toggle('selected',+b.dataset.choice===n));
+   }
+   drawPredict7000();
+ });
+});
+window.addEventListener('resize',()=>{if(predict7000&&predict7000.classList.contains('show'))drawPredict7000()});
+
+function start(){if(running)return;sensors=true;light=true;simLamp.classList.add('on');running=true;startBtn.disabled=true;phase.textContent='광합성 진행 중';startStamp=performance.now();data=[{t:0,...valuesAt(0)}];tick(startStamp)}
+function tick(now){const p=Math.min(1,(now-startStamp)/durationMs);elapsed=Math.round(maxSec*p);const v=valuesAt(elapsed);co2El.textContent=`${v.co2.toFixed(0)} ppm`;o2El.textContent=`${v.o2.toFixed(0)} ppm`;const mm=String(Math.floor(elapsed/60)).padStart(2,'0'),ss=String(elapsed%60).padStart(2,'0');timerEl.textContent=`${mm}:${ss}`;bar.style.width=(p*100)+'%';if(!data.length||elapsed-data[data.length-1].t>=10||p===1)data.push({t:elapsed,...v});drawChart();if(p<1){raf=requestAnimationFrame(tick)}else{running=false;phase.textContent='측정 완료';showGasActivity();}}
+startBtn.onclick=start;
+function resetSim(){hideGasActivity();if(raf)cancelAnimationFrame(raf);setLux(5000);resetPrediction();running=false;elapsed=0;sensors=false;light=false;data=[];simLamp.classList.remove('on');co2El.textContent='628 ppm';o2El.textContent='202300 ppm';timerEl.textContent='00:00';bar.style.width='0%';phase.textContent='실험 준비';updateReady();drawChart()}
+document.getElementById('resetBtn').onclick=resetSim;
+
+const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');
+function drawChart(){const cssW=canvas.clientWidth||800, cssH=canvas.clientHeight||310, dpr=Math.max(1,window.devicePixelRatio||1);if(canvas.width!==Math.round(cssW*dpr)||canvas.height!==Math.round(cssH*dpr)){canvas.width=Math.round(cssW*dpr);canvas.height=Math.round(cssH*dpr)}ctx.setTransform(dpr,0,0,dpr,0,0);const w=cssW,h=cssH;ctx.clearRect(0,0,w,h);const L=58,R=58,T=20,B=42,pw=w-L-R,ph=h-T-B;ctx.strokeStyle='#cbd5e1';ctx.lineWidth=1;ctx.font='12px sans-serif';ctx.fillStyle='#64748b';for(let i=0;i<=7;i++){const x=L+pw*i/7;ctx.beginPath();ctx.moveTo(x,T);ctx.lineTo(x,T+ph);ctx.stroke();ctx.fillText(String(i),x-3,h-18)}for(let i=0;i<=5;i++){const y=T+ph*i/5;ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(L+pw,y);ctx.stroke()}ctx.fillText('시간(분)',w/2-24,h-4);ctx.save();ctx.translate(14,h/2);ctx.rotate(-Math.PI/2);ctx.fillText('CO₂ (ppm)',0,0);ctx.restore();ctx.save();ctx.translate(w-10,h/2);ctx.rotate(Math.PI/2);ctx.fillText('O₂ (ppm)',0,0);ctx.restore();
+ const pts=data.length?data:[{t:0,...valuesAt(0)}];
+ function x(t){return L+pw*(t/maxSec)} function yco(v){return T+ph*(1-(v-580)/(635-580))} function yo(v){return T+ph*(1-(v-202250)/(202900-202250))}
+ ctx.lineWidth=3;ctx.strokeStyle='#e11d48';ctx.beginPath();pts.forEach((p,i)=>{const X=x(p.t),Y=yco(p.co2);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)});ctx.stroke();ctx.strokeStyle='#0ea5e9';ctx.beginPath();pts.forEach((p,i)=>{const X=x(p.t),Y=yo(p.o2);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)});ctx.stroke();
+
+ // 7000 lx에서 학생이 고른 예상 그래프를 5000 lx 실선 위에 점선으로 겹쳐 표시
+ if(selectedLux===7000){
+   ctx.save();ctx.setLineDash([9,7]);ctx.lineWidth=3;
+   if(selectedPrediction.co2){
+     ctx.strokeStyle='#e11d48';ctx.beginPath();
+     for(let s=0;s<=420;s+=10){const X=x(s),Y=yco(predictedValue('co2',selectedPrediction.co2,s));s?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}
+     ctx.stroke();
+   }
+   if(selectedPrediction.o2){
+     ctx.strokeStyle='#0ea5e9';ctx.beginPath();
+     for(let s=0;s<=420;s+=10){const X=x(s),Y=yo(predictedValue('o2',selectedPrediction.o2,s));s?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}
+     ctx.stroke();
+   }
+   ctx.restore();
+ }
+ if(gasActivityVisible && selectedLux!==7000){
+   ctx.save();ctx.strokeStyle='#334155';ctx.lineWidth=1.3;ctx.setLineDash([6,4]);
+   // ① -> red CO2 curve near 1.2 min
+   let s1=72,v1=valuesAt(s1).co2;
+   ctx.beginPath();ctx.moveTo(L+pw*.16,T+ph*.31);ctx.lineTo(x(s1),yco(v1));ctx.stroke();
+   // ② -> blue O2 curve near 2.0 min
+   let s2=120,v2=valuesAt(s2).o2;
+   ctx.beginPath();ctx.moveTo(L+pw*.31,T+ph*.48);ctx.lineTo(x(s2),yo(v2));ctx.stroke();
+   ctx.restore();
+ }
+ ctx.fillStyle='#e11d48';ctx.fillText('630',6,T+5);ctx.fillText('585',6,T+ph);ctx.fillStyle='#0284c7';ctx.fillText('202850',w-52,T+5);ctx.fillText('202250',w-52,T+ph);}
+let resizeTimer=null;function scheduleChart(){clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{drawChart();if(selectedLux===7000)drawChoiceGraphs()},60)}window.addEventListener('resize',scheduleChart,{passive:true});window.addEventListener('orientationchange',()=>setTimeout(drawChart,180),{passive:true});if(window.ResizeObserver){new ResizeObserver(scheduleChart).observe(canvas)}document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestAnimationFrame(drawChart)});resetSim();updateBuild();
+})();
+</script>
+</body>
+</html>
